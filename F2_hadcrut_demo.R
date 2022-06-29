@@ -1,6 +1,6 @@
 source("init.R") #load required packages, fix parameters and functions
 
-saveToPdf <- T
+saveToPdf <- F
 
 #load data
 fit_1box = loadRData("output/hadcrut-fits-cea-sbf/hadcrut_1box.rda")
@@ -11,8 +11,8 @@ fit_3box = loadRData("output/hadcrut-fits-cea-sbf/hadcrut_3box.rda")
 create_labs_dict <- function(X_names) {
   d = length(X_names)
   labs_dict = list("T0" = unname(latex2exp::TeX("$T_0 \\, (K)$")),
-                   "F0" = unname(latex2exp::TeX("$F_0 \\, (W m^{−2})$")),
-                   "Cap" = unname(latex2exp::TeX("$C \\, (W yr m^{−2} K^{−1})$")))
+                   "F0" = unname(latex2exp::TeX("$F_0 \\, (W m^{-2})$")),
+                   "Cap" = unname(latex2exp::TeX("$C \\, (W yr m^{-2} K^{-1})$")))
   for(j in 1:d) {
     var_name = X_names[j]
     if(startsWith(var_name, "lambda")) {
@@ -40,7 +40,7 @@ for (par in names(fit_2box$posteriors$parameters)) {
 lsize <- 0.7 #line size
 tsize <- 12.5 #textsize
 
-plots2 = plot(fit_2box)
+plots2 = plot_fit(fit_2box)
 gg_marginals2  = plots2$gg_marginals
 
 test_2box <- noisy_spectra(fit_2box, df.log=0.08, median=F, debug=F, n_samples = 1000)
