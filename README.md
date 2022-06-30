@@ -37,7 +37,7 @@ This repository provides code in supplement to "Separating internal and external
 
 Running the code in this repository requires the following [R](https://www.r-project.org/) packages:
 
-- `ClimBayes` from https://github.com/paleovar/ClimBayes
+- `ClimBayes` from https://github.com/paleovar/ClimBayes (latest release v.0.1.1)
 - `dplyr`
 - `ggplot2` 
 - `tibble` 
