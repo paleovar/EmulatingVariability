@@ -16,7 +16,7 @@ data_3box = data.frame(year = 1850:2000,
                        temp_upper = fit_3box$posteriors$model_fit$upper_quant,
                        type = "3-box")
 
-save <- T
+save <- F
 
 lsize <- 0.7 #line size
 tsize <- 12.5 #textsize
@@ -48,7 +48,7 @@ p1 <- ClimBayes::plot_two_fits(fit_1box, fit_2box, line_size=lsize, text_size=ts
         legend.box.background =  element_rect(colour = "black"),
         legend.title= element_blank(),
         legend.margin = ggplot2::margin(t=-0.02,l=0.05,b=0.05,r=0.1, unit='cm')) +
-  theme_td(tsize) + theme(plot.margin = margin(0,0.5,0,0, "cm"))
+  theme_td(tsize) + theme(plot.margin = margin(0,0.5,0,0, "cm")) 
 print(p1)
 
 p1_ann <- p1 +
@@ -106,24 +106,36 @@ fit_df = data.frame(year = 1850:2000, y = fit_2box$posteriors$model_fit$mean) %>
 sol_df = data.frame(year = 1850:2000, y = fit_2box$input_params$y_obs) %>% add_column(realisation="Observation")
 my_colors <- RColorBrewer::brewer.pal(5, "OrRd")[3:5]
 gg_noisy <- ggplot(rbind(noise_df2, sol_df, fit_df)) +
-  geom_line(aes(x = year, y = y, col=realisation), size = lsize) +
+  geom_line(aes(x = year, y = y, col=realisation, size = realisation, alpha=realisation)) +
   labs(x = "Time (yr CE)", y = "Temperature anomaly (K)") +
   scale_x_continuous(expand=c(0,0)) +
   theme_bw() +
   theme_td(tsize) +
   theme(legend.position = "none") +
-  scale_color_manual(values=c("Observation"=COL[["simulation"]],
-                              "2-box"=col2,
+  scale_color_manual(values=c("2-box"=col2,
+                              "Observation"=COL[["simulation"]], 
                               "V1"=my_colors[1],
                               "V2"=my_colors[2],
                               "V3"=my_colors[3]),
                      breaks=c("Observation","2-box","V1","V2","V3"),
                      labels = c("HadCRUT5", "forced", "forced+internal (E1)", "forced+internal (E2)", "forced+internal (E3)")) +
+  scale_size_manual(values=c("Observation"=1.4,
+                              "2-box"=1.4,
+                              "V1"=lsize,
+                              "V2"=lsize,
+                              "V3"=lsize)) +
+  scale_alpha_manual(values=c("Observation"=1,
+                              "2-box"=1,
+                              "V1"=0.7,
+                              "V2"=0.7,
+                              "V3"=0.7)) +
   theme(legend.position=c(0.25,0.8),
         legend.box.background =  element_rect(colour = "black"),
         legend.title= element_blank(),
         legend.margin = ggplot2::margin(t=-0.02,l=0.05,b=0.05,r=0.1, unit='cm')) +
-  theme_td(tsize) + theme(plot.margin = margin(0,0.5,0,0, "cm"))
+  theme_td(tsize) + theme(plot.margin = margin(0,0.5,0,0, "cm")) +
+  guides(size="none", alpha="none")
 gg_noisy
 
-if(save) ggsave("plots/FS5_hadcrut_fit+noise.pdf", device = cairo_pdf, width=6, height=4, dpi=900)
+if(save) 
+ggsave("plots/FS5_hadcrut_fit+noise_v2.pdf", device = cairo_pdf, width=6, height=4, dpi=900)
