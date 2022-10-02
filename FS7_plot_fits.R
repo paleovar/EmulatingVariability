@@ -21,20 +21,20 @@ for(modeltype in c("EMIC", "EMIC_LO", "CMIP")){
     }
 
     p[[i]] <- plot_fit(res_2box) +
-      scale_x_continuous(name="Time (yrs CE)", expand=c(0.02,0.02), limits=c(850, 1850)) +
-      scale_y_continuous(limits=c(-1.5, 0.6), breaks=c(0.5, 0,-.5, -1,-1.5), labels=c("", "0", "", "-1", "")) +
+      scale_x_continuous(limits= c(850,1850), name="Time (yrs CE)", expand=c(0.01,0.01)) +
+      scale_y_continuous(limits=c(-1.9,0.6), breaks=c(0.5, 0,-.5, -1,-1.5, -2), labels=c("", "0", "", "-1", "", "")) +
       theme_td(txtsize) +
       annotate("text", 900, 0.5, label=letters[[cnt]], size=3.0, fontface =2, hjust = 0) +
       theme(legend.position=c(0.78,0.15), plot.margin = margin(l=0.1, b=0.0, unit="cm")) + #plot.margin
       scale_color_manual(
         values = c("Observations" = COL[["simulation"]], "Model est." = COL[["fit"]]),
         breaks=c("Observations", "Model est."),
-        labels=c("target simulation", "2-box fit")) +
+        labels=c("target simulation", "forced response (2-box)")) +
       scale_fill_manual(
         values = c("Model est." = COL[["fit"]])) +
       guides(fill="none")
 
-      p[[i]] <- p[[i]] + annotate("text", 900, -1.2, label=c(signal_tbb %>% filter(name==runs[[i]]))$alt_name, size=3.0, hjust = 0)
+      p[[i]] <- p[[i]] + annotate("text", 900, -1.6, label=c(signal_tbb %>% filter(name==runs[[i]]))$alt_name, size=3.0, hjust = 0)
 
       if(modeltype!="EMIC_LO"){
         if(!i %in% c(7,8,9,10)){
@@ -110,11 +110,11 @@ for(modeltype in c("EMIC", "EMIC_LO", "CMIP")){
       ncol=1, align="v", rel_heights = c(1,1.3,-0.35,1.3)
         )
 
-    p3 <- ggpubr::annotate_figure(p3, top=ggpubr::text_grob("CMIP models", x=0.06, face="bold"),
+    p3 <- ggpubr::annotate_figure(p3, top=ggpubr::text_grob("CMIP5 models", x=0.06, face="bold"),
                                 left=ggpubr::text_grob(latex2exp::TeX('Temperature anomaly (K)'), rot=90, size=txtsize))
     }
 
   if(modeltype=="CMIP") cowplot::plot_grid(p1, p2, p3, nrow=3, rel_heights = c(1,0.7,1))
-  if(saveToPDF) ggsave(paste0("plots/FS7_fits_supp.pdf"), width=12, height=12, dpi=900, device=cairo_pdf)
+  if(saveToPDF) ggsave(paste0("plots/FS7_fits_supp.pdf"), width=12, height=12, dpi=800, device=cairo_pdf)
 }
 
