@@ -61,8 +61,8 @@ p1 <- ClimBayes::plot_fit(fit_2box, line_size=lsize, textsize=tsize) + scale_fil
   geom_line(aes(y=rep(fit_2box$input_params$forc_vals*scl +y_shift,2)), size=lsize, colour=col_forc) +
   scale_x_continuous(limits=c(1850,2000), expand=c(0,0), name = latex2exp::TeX("Time (yr CE)"))+
   scale_y_continuous(name = latex2exp::TeX("Temperature anomaly $(K)$"), sec.axis = sec_axis(~ (. - y_shift)/scl, name = latex2exp::TeX("Radiative forcing anomaly $(W/m^2)$"))) +
-  scale_color_manual(values=c("Observations"=COL[["simulation"]], "Model est."=COL[["fit"]]), labels=c("HadCRUT5", "EBM det. model fit"), name="") +
-  theme(legend.position=c(0.25,0.88),
+  scale_color_manual(values=c("Observations"=COL[["simulation"]], "Model est."=COL[["fit"]]), labels=c("HadCRUT5", "forced response (2-box)"), name="") +
+  theme(legend.position=c(0.3,0.88),
         legend.box.background =  element_rect(colour = "black"),
         legend.title= element_blank(),
         axis.text.y.right=element_text(margin = unit(c(t = 0, r = 0, b = 0, l = 2.), "mm"), colour=col_forc),
@@ -85,7 +85,7 @@ plots <- list()
 for(i in seq_along(gg$plot_list)){
   plots[[i]] <- gg$plot_list[[i]] + theme_td(tsize) +
       scale_color_manual(values=c("Posterior"=COL[["Posterior"]], "Prior"=COL[["Prior"]])) +
-      scale_x_continuous(limits=bounds[[i]],  breaks=c(bounds[[i]][1], sum(bounds[[i]])/2, bounds[[i]][2])) +
+      scale_x_continuous(limits=bounds[[i]], breaks=c(bounds[[i]][1], sum(bounds[[i]])/2, bounds[[i]][2])) +
       theme(axis.title.y=element_blank(),
             legend.position="none")
 }
@@ -114,7 +114,8 @@ print(p3)
 #lower right pannel
 var_tibble <- tscale_var(test_2box %>% rename(Spec=data), tscales=list("interannual"=list("t1"=2, "t2"=5),
                                                  "decadal"=list("t1"=5,"t2"=20),
-                                                 "multidecadal"=list("t1"=20,"t2"=100)))
+                                                 "multidecadal"=list("t1"=20,"t2"=100)))#,
+                                                 #"centennial"=list("t1"=100, "t2"=150)))
 var_tibble$var <- as.numeric(var_tibble$var)
 var_tibble$dof <- as.numeric(var_tibble$dof)
 
@@ -134,25 +135,28 @@ var_tibble <- do.call(rbind, var_joint)  %>% ungroup()
 
 var_tibble$name <- factor(var_tibble$name, c("simulation", "fit+noise",  "fit"))
 var_tibble$tscale <- factor(var_tibble$tscale, rev(c("interannual", "decadal", "multidecadal")))
+#var_tibble$tscale <- factor(var_tibble$tscale, rev(c("interannual", "decadal", "multidecadal", "centennial")))
 
 p4 <- ggplot(var_tibble %>% filter(name!="simulation"), aes(x=tscale, y=varratio, color=name, fill=name)) +
   geom_errorbar(aes(ymin=q.low, ymax=q.up), width=0., alpha=0.8) +
   geom_point(size = 4, alpha = .5) +
   ylab("Varriance ratio (emulated / target)") +
   theme_bw() + theme_td(tsize) +
-  scale_y_log10() +
+  scale_y_log10(limits=c(0.03, 1.1), breaks=c(0.03, 0.1, 0.3, 1), labels=c(0.03, 0.1, 0.3, 1)) +
   xlab("Timescale")+
   geom_hline(yintercept = 1) +
   scale_fill_manual(values=c( "fit+noise"=COL[["fit+noise"]], "fit"=COL[["fit"]]), labels=c( "forced + internal variability",  "forced variability")) +
   scale_color_manual(values=c("fit+noise"=COL[["fit+noise"]], "fit"=COL[["fit"]]), labels=c("forced + internal variability",  "forced variability")) +
-  theme(legend.position=c(0.29, 0.18),
+  theme(legend.position=c(0.29, 0.15),
         legend.key = element_rect(color = NA, fill = NA),
-        legend.key.size = unit(.5, "cm"),
+        legend.key.size = unit(.1, "cm"),
         strip.background = element_blank(),
         strip.text.x = element_text(face = "bold", hjust = 0, vjust=-1),
         legend.box.background = element_rect(colour = "black")
         )
 print(p4)
+
+ggsave("plots/hadcrut_centennial.pdf", width=5.6, height=4.7, dpi=900, device = cairo_pdf)
 
 #plot all together
 y.grob <- grid::textGrob("Density", gp=grid::gpar(col="black", fontsize=tsize), rot=90)
@@ -164,4 +168,4 @@ t2 <- cowplot::plot_grid(p2,p4, nrow=2, ncol=1, align="v", labels=c("b", "d"))
 cowplot::plot_grid(t1, t2, ncol=2, align="hv")
 
 #save
-if(saveToPdf) ggsave("plots/f2_hadcrut_framework.pdf", width=12, height=8, dpi=900, device = cairo_pdf)
+if(saveToPdf) ggsave("plots/F2_hadcrut_framework.pdf", width=12, height=8, dpi=900, device = cairo_pdf)
