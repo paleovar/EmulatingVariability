@@ -4,7 +4,7 @@
 
 source("init.R")
 
-saveToPDF <- F
+saveToPDF <- T
 
 #GET DATA
 median=F #consider the mean spectrum
@@ -186,7 +186,7 @@ ggplot(var_tibble %>% filter(name!="simulation"), aes(x=tscale, y=varratio, colo
   ) +
   ylab("Varriance ratio (emulated / target)") +
   theme_bw() + theme_td(txtsize) +
-  scale_y_log10() +
+  scale_y_log10(limits=c(0.09, 3), breaks=c(0.1, 0.3,1,3), labels=c( 0.1, 0.3, 1, 3)) +
   scale_fill_manual(values=c( "fit+noise"=COL[["fit+noise"]], "fit"=COL[["fit"]]), labels=c("forced + internal variability",  "forced variability")) +
   scale_color_manual(values=c("fit+noise"=COL[["fit+noise"]], "fit"=COL[["fit"]]), labels=c("forced + internal variability",  "forced variability")) +
   facet_wrap(~type, scale="fix",  labeller=as_labeller(facet.labs)) +
