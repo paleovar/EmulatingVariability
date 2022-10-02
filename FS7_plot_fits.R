@@ -21,7 +21,7 @@ for(modeltype in c("EMIC", "EMIC_LO", "CMIP")){
     }
 
     p[[i]] <- plot_fit(res_2box) +
-      scale_x_continuous(limits= c(850,1850), name="Time (yrs CE)", expand=c(0.01,0.01)) +
+      scale_x_continuous(limits= c(850,1850), name="Time (yr CE)", expand=c(0.01,0.01)) +
       scale_y_continuous(limits=c(-1.9,0.6), breaks=c(0.5, 0,-.5, -1,-1.5, -2), labels=c("", "0", "", "-1", "", "")) +
       theme_td(txtsize) +
       annotate("text", 900, 0.5, label=letters[[cnt]], size=3.0, fontface =2, hjust = 0) +
