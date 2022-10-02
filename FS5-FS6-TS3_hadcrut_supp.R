@@ -24,7 +24,8 @@ tsize <- 12.5 #textsize
 col1 = "deepskyblue2"
 col2 = COL[["fit"]]
 col3 = "black"
-p1 <- ClimBayes::plot_two_fits(fit_1box, fit_2box, line_size=lsize, text_size=tsize, cols = c("darkgrey", "skyblue", COL[["fit"]]),
+p1 <- ClimBayes::plot_two_fits(fit_1box, fit_2box, line_size=lsize, text_size=tsize, 
+                               cols = c("darkgrey", "skyblue", COL[["fit"]]),
                                print_RMSE = F) +
   geom_line(aes(x = year, y = temp, col = type), data = data_3box, size = lsize) +
   geom_ribbon(data = data_3box,
@@ -35,7 +36,7 @@ p1 <- ClimBayes::plot_two_fits(fit_1box, fit_2box, line_size=lsize, text_size=ts
                               "2-box"=col2,
                               "3-box"=col3),
                      breaks = c("Observations", "1-box", "2-box", "3-box"),
-                     labels=c("HadCRUT5", "1-box fit", "2-box fit", "3-box fit"), name="") +
+                     labels=c("HadCRUT5", "forced response (1-box)", "forced response (2-box)", "forced response (3-box)"), name="") +
   scale_fill_manual(values=c("Observations"=COL[["simulation"]],
                              "1-box"=col1,
                              "2-box"=col2,
@@ -44,7 +45,7 @@ p1 <- ClimBayes::plot_two_fits(fit_1box, fit_2box, line_size=lsize, text_size=ts
                     guide = "none") +
   scale_x_continuous(limits=c(1850,2000), expand=c(0.,0.), name = latex2exp::TeX("Time (yr CE)"))+
   scale_y_continuous(name = latex2exp::TeX("Temperature anomaly $(K)$")) +
-  theme(legend.position=c(0.15,0.85),
+  theme(legend.position=c(0.25,0.85),
         legend.box.background =  element_rect(colour = "black"),
         legend.title= element_blank(),
         legend.margin = ggplot2::margin(t=-0.02,l=0.05,b=0.05,r=0.1, unit='cm')) +
