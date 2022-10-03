@@ -31,7 +31,7 @@ data = rbind(
                                  type = "forced response")
 )
 
-col_forc="darkgreen"
+col_forc = COL[["forcing"]]
 COL[["mean"]] = "deepskyblue2"
 
 scl=1/20
