@@ -90,7 +90,7 @@ for(i in unique(tbb$name)){
 }
 
 table_tbb <- purrr::reduce(table_tbb, left_join)
-table_tbb %>% select(box, lambda1, lambda2, lambda3, weights1, weights2, T0, F0) -> table_tbb
+table_tbb %>% select(box, lambda1, lambda2, lambda3, weights1, weights2, T0, F0, Cap) -> table_tbb
 
 if(save) write.csv2(table_tbb %>% select(-T0, -F0), "tableS3_hadcrut_params.csv", row.names = FALSE, quote=F,  na="")
 
