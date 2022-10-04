@@ -77,6 +77,7 @@ bounds <- list(
   c(fit_2box$input_params$lambda1_lb, fit_2box$input_params$lambda1_ub),
   c(fit_2box$input_params$lambda2_lb, fit_2box$input_params$lambda2_ub),
   c(fit_2box$input_params$weights1_lb,fit_2box$input_params$weights1_ub),
+    c(fit_2box$input_params$Cap_lb,fit_2box$input_params$Cap_ub),
   c(fit_2box$input_params$T0_lb,fit_2box$input_params$T0_ub),
   c(fit_2box$input_params$F0_lb,fit_2box$input_params$F0_ub)
 )
@@ -97,7 +98,7 @@ leg <- get_legend(gg$plot_list[[i]] + theme_td(tsize) +
 )
 plots[[i+1]] <- ggpubr::as_ggplot(leg)
 
-p2 <- cowplot::plot_grid(plotlist=plots, align="hv")
+p2 <- cowplot::plot_grid(plotlist=plots, align="hv",  rel_heights = c(1,1,0.5))
 print(p2)
 
 #lower left pannel
@@ -142,7 +143,7 @@ p4 <- ggplot(var_tibble %>% filter(name!="simulation"), aes(x=tscale, y=varratio
   geom_point(size = 4, alpha = .5) +
   ylab("Varriance ratio (emulated / target)") +
   theme_bw() + theme_td(tsize) +
-  scale_y_log10(limits=c(0.03, 1.3), breaks=c(0.03, 0.1, 0.3, 1), labels=c(0.03, 0.1, 0.3, 1)) +
+  scale_y_log10(limits=c(0.03, 1), breaks=c(0.03, 0.1, 0.3, 1), labels=c(0.03, 0.1, 0.3, 1)) +
   xlab("Timescale")+
   geom_hline(yintercept = 1) +
   scale_fill_manual(values=c( "fit+noise"=COL[["fit+noise"]], "fit"=COL[["fit"]]), labels=c( "forced + internal variability",  "forced variability")) +
@@ -167,3 +168,5 @@ cowplot::plot_grid(t1, t2, ncol=2, align="hv")
 
 #save
 if(saveToPdf) ggsave("plots/F2_hadcrut_framework.pdf", width=12, height=8, dpi=900, device = cairo_pdf)
+
+#ggsave("plots/hadcrut_centennial.pdf", width=6, height=5, dpi=900, device = cairo_pdf)
