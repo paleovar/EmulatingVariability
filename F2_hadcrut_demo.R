@@ -142,7 +142,7 @@ p4 <- ggplot(var_tibble %>% filter(name!="simulation"), aes(x=tscale, y=varratio
   geom_point(size = 4, alpha = .5) +
   ylab("Varriance ratio (emulated / target)") +
   theme_bw() + theme_td(tsize) +
-  scale_y_log10(limits=c(0.03, 1.1), breaks=c(0.03, 0.1, 0.3, 1), labels=c(0.03, 0.1, 0.3, 1)) +
+  scale_y_log10(limits=c(0.03, 1.3), breaks=c(0.03, 0.1, 0.3, 1), labels=c(0.03, 0.1, 0.3, 1)) +
   xlab("Timescale")+
   geom_hline(yintercept = 1) +
   scale_fill_manual(values=c( "fit+noise"=COL[["fit+noise"]], "fit"=COL[["fit"]]), labels=c( "forced + internal variability",  "forced variability")) +
@@ -155,8 +155,6 @@ p4 <- ggplot(var_tibble %>% filter(name!="simulation"), aes(x=tscale, y=varratio
         legend.box.background = element_rect(colour = "black")
         )
 print(p4)
-
-ggsave("plots/hadcrut_centennial.pdf", width=5.6, height=4.7, dpi=900, device = cairo_pdf)
 
 #plot all together
 y.grob <- grid::textGrob("Density", gp=grid::gpar(col="black", fontsize=tsize), rot=90)
