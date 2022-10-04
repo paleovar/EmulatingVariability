@@ -4,7 +4,7 @@
 
 source("init.R")
 
-saveToPDF <- T
+saveToPDF <- F
 
 #GET DATA
 median=F #consider the mean spectrum
@@ -124,7 +124,7 @@ p1 <- cowplot::plot_grid(
   plot_grid(plotlist=pall[[type]][c(5,6,7,8)], ncol=ncol, align="h", axis="tblr", scale=1.0, greedy=F, rel_widths = c(1.2,1,1,1)),
   NULL,
   plot_grid(pall[[type]][[9]], pend, NULL, NULL, ncol=ncol, axis="tblr", scale=1.0, greedy=F, rel_widths = c(1.2,0.98,1.02,1)),
-  ncol=1, align="v", rel_heights = c(1,1.3,-0.47,1.3))
+  ncol=1, align="v", rel_heights = c(1,1.5,-0.61,1.5))
 
 type="EMIC"
 pend <- pall[[type]][[length(pall[[type]])]]
@@ -133,13 +133,15 @@ p2 <- cowplot::plot_grid(
   plot_grid(plotlist=pall[[type]][c(5,6,7,8)], ncol=ncol, align="h", axis="tblr", scale=1.0, greedy=F, rel_widths = c(1.2,1,1,1)),
   NULL,
   plot_grid(pall[[type]][[9]], pall[[type]][[10]], pend, leg, ncol=ncol, axis="tblr", scale=1.0, greedy=F, rel_widths = c(1.2,.99,.98,1.01)),
-  ncol=1, align="v", rel_heights = c(1,1.3,-0.47,1.3))
+  ncol=1, align="v", rel_heights = c(1,1.5,-0.61,1.5))
 
 p1 <- ggpubr::annotate_figure(p1, top=ggpubr::text_grob("CMIP5 models", x=0.05, face="bold"),
-                              left=ggpubr::text_grob(latex2exp::TeX('Power spectral density (PSD) $(K^2 yr)$'), rot=90, size=txtsize))
+                              left=ggpubr::text_grob(latex2exp::TeX('Power spectral density (PSD) $(K^2 yr)$'), 
+                              rot=90, size=txtsize))
 print(p1)
 p2 <- ggpubr::annotate_figure(p2, top=ggpubr::text_grob("AR5 EMICs", x=0.05, face="bold"),
-                              left=ggpubr::text_grob(latex2exp::TeX('Power spectral density (PSD) $(K^2 yr)$'), rot=90, size=txtsize))
+                              left=ggpubr::text_grob(latex2exp::TeX('Power spectral density (PSD) $(K^2 yr)$'), 
+                              rot=90, size=txtsize))
 print(p2)
 
 cowplot::plot_grid(p2,p1, nrow=2)
