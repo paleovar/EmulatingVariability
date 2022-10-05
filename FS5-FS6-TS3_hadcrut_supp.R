@@ -138,5 +138,4 @@ gg_noisy <- ggplot(rbind(noise_df2, sol_df, fit_df)) +
   guides(size="none", alpha="none")
 gg_noisy
 
-if(save) 
-ggsave("plots/FS5_hadcrut_fit+noise_v2.pdf", device = cairo_pdf, width=6, height=4, dpi=900)
+if(save) ggsave("plots/FS5_hadcrut_fit+noise_v2.pdf", device = cairo_pdf, width=6, height=4, dpi=900)
