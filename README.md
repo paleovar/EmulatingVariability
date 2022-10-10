@@ -1,6 +1,6 @@
 ## Physically-motivated emulation of GMST variability
 
-This repository provides code in supplement to "Separating internal and externally-forced contributions to global temperature variability using a Bayesian stochastic energy balance framework" (M. Schillinger et al. 2022) submitted Chaos: An Interdisciplinary Journal of Nonlinear Science. A preprint of the manuscript is available at .... This repository will be made openly available upon publication of the manuscript.
+This repository provides code in supplement to "Separating internal and externally-forced contributions to global temperature variability using a Bayesian stochastic energy balance framework" (M. Schillinger et al. 2022) submitted Chaos: An Interdisciplinary Journal of Nonlinear Science. A preprint of the manuscript is available at https://arxiv.org/abs/2206.14573 . This repository will be made openly available upon publication of the manuscript.
 
 **Authors**: M. Schillinger, B. Ellerhoff, R. Scheichl, K. Rehfeld
 **Responsible for this repository:**  Beatrice Ellerhoff ([@bellerhoff](https://github.com/bellerhoff)),  Maybritt Schillinger ([@m-schilinger](https://github.com/m-schillinger))
@@ -37,7 +37,7 @@ This repository provides code in supplement to "Separating internal and external
 
 Running the code in this repository requires the following [R](https://www.r-project.org/) packages:
 
-- `ClimBayes` from https://github.com/paleovar/ClimBayes
+- `ClimBayes` from https://github.com/paleovar/ClimBayes (latest release v.0.1.1)
 - `dplyr`
 - `ggplot2` 
 - `tibble` 
@@ -69,7 +69,7 @@ The directory `./output/` contains the pre-processed data, which we obtained fro
 
 ## References and Acknowledgments
 
-Please see the data availability and acknowledgment statement of the submitted manuscript and the ClimBayes package. 
+Please see the data availability and acknowledgment statement of the submitted manuscript (https://arxiv.org/abs/2206.14573) and the ClimBayes package. 
 
 We acknowledge the [R Core team](https://www.R-project.org/) and all package developers of packages used in this study. We thank them for their time and dedication to provide R and the packages to the public. Please see `citation()` for details on the R Core Team and `citation("pkgname")` for details on the developers of individual packages.
 
