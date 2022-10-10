@@ -12,7 +12,7 @@ cmip:
   # if 'fixed', then the default values are taken from parameter_defaults
   parameters:
     # heat capacity
-    Cap: fixed
+    Cap: estimate
     # initial temperature parameter
     T0: estimate
     # initial forcing parameter
@@ -25,7 +25,7 @@ cmip:
   parameter_defaults:
     T0: 0
     F0: 0
-    Cap: 10.1
+    Cap: 7.3
     two_box:
       weights:
         - 0.7
@@ -146,13 +146,13 @@ cmip:
     # prior bounds for heat capacity
     # only required if the above default value is changed to 'estimate'
     Cap_bounds:
-      - 5.0
-      - 15.0
+      - 4.0
+      - 11.0
 
   # specification for metropolis-hastings algorithm
   metropolis_hastings:
     # number of samples
-    n_samples: 20000.0
+    n_samples: 25000.0
     # proposal variance
     # If 'auto', then determined automatically from prior intervals
     # If 'default', then values for lambda are chosen from defaults below
@@ -171,14 +171,14 @@ cmip:
           - 0.0000002
       weights: 0.00001
       T0: 0.00001
-      F0: 0.00002
-      Cap: 0.1
+      F0: 0.00001
+      Cap: 0.0001
     # weighting factor in adaptive covariance scheme, between 0 and 1
     alpha: 0.8
     # specifiy burn-in period
     # the number of samples discarded in each chain is
     # n_samples / burn_in_proportion
-    burn_in_proportion: 4.0
+    burn_in_proportion: 5.0
     # number of chains
     n_chains: 4.0
     # buffer for start points of chains, in percentage of prior interval
