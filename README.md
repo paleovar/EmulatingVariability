@@ -1,6 +1,6 @@
 ## Physically-motivated emulation of GMST variability
 
-This repository provides code in supplement to "Separating internal and externally-forced contributions to global temperature variability using a Bayesian stochastic energy balance framework" (M. Schillinger et al. 2022) submitted Chaos: An Interdisciplinary Journal of Nonlinear Science. A preprint of the manuscript is available at https://arxiv.org/abs/2206.14573 . This repository will be made openly available upon publication of the manuscript.
+This repository provides code in supplement to "Separating internal and externally-forced contributions to global temperature variability using a Bayesian stochastic energy balance framework" (M. Schillinger et al. 2022) accepted in Chaos: An Interdisciplinary Journal of Nonlinear Science. A preprint of the manuscript is available at https://arxiv.org/abs/2206.14573 . 
 
 **Authors**: M. Schillinger, B. Ellerhoff, R. Scheichl, K. Rehfeld
 **Responsible for this repository:**  Beatrice Ellerhoff ([@bellerhoff](https://github.com/bellerhoff)),  Maybritt Schillinger ([@m-schilinger](https://github.com/m-schillinger))
