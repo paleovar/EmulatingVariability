@@ -24,6 +24,7 @@ This repository provides code in supplement to "Separating internal and external
 | `F3-F4_spectra_variance.R` | Spectral analysis and emulation of timescale-depenedent variance, creates Figure 3 and 4 |
 | `FS5-FS6-TS3_hadcrut_supp.R` | Supplementary validity check of choice of parameters and sampling of internal variance, creates Figues 5 and 6, as well as Table 3 (in Appendix) |
 | `F7_plot_fits.R` | Forced response from 2-box fit for all considered runs, Figure 7 in Appendix  |
+| `FS8_large_ensemble.R` | Comparison of fitted forced response to forced variability from large ensemble |
 
 
 | additional files             | description                                                  |
